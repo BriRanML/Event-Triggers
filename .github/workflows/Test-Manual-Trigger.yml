@@ -1,6 +1,12 @@
 name: Test Manual Trigger
 
-on: [workflow_dispatch, push]
+on:
+  push:
+    paths: 
+      -  '**'
+      - '!Readme.md'
+      - '!.github/**'
+      - '.github/workflows/Test-Manual-Trigger.yml'
 
 jobs:
   test:
