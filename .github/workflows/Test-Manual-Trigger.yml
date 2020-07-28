@@ -39,6 +39,7 @@ jobs:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
       - name: wait job1 completed
+        shell: bash
         run: |
           status=""
           conclusion=""
