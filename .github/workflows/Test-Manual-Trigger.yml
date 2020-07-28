@@ -40,8 +40,8 @@ jobs:
 
       - name: wait job1 completed
         run: |
-          status=''
-          conclusion=''
+          status=""
+          conclusion=""
           while [ $status != "completed" ]
           do
             response=$(curl --request GET \
