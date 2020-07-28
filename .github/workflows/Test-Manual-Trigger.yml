@@ -54,10 +54,10 @@ jobs:
             echo "$response"
             echo "--------------------------------------------------------------------------------------------------"
             
-            status=$(echo $response | jq -r '.jobs[] | select(.jobs[].name=="job1" | .status)')
+            status=$(echo $response | jq -r '.jobs[] | select(.name=="job1" | .status)')
             echo $status
             if [[ $status == completed ]]; then
-              conclusion=$(echo $response | jq -r '.jobs[] | select(.jobs[].name=="job1" | .conclusion)')
+              conclusion=$(echo $response | jq -r '.jobs[] | select(.name=="job1" | .conclusion)')
               echo $conclusion
             fi
           done
