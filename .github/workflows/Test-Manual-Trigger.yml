@@ -50,8 +50,8 @@ jobs:
             --header 'Authorization: token ${{ secrets.MY_GITHUB_PAT }}' \
             --header 'Accept: application/vnd.github.v3+json')
             
-            status=$(echo $response | jq -r '.jobs[].status | select(.jobs[].name=="job1")')
-            conclusion=$(echo $response | jq -r '.jobs[].conclusion | select(.jobs[].name=="job1")')
+            status=$(echo $response | jq -r '.jobs[] | select(.jobs[].name=="job1" | .status)')
+            conclusion=$(echo $response | jq -r '.jobs[] | select(.jobs[].name=="job1" | .conclusion)')
           done
           
           if [[ $conclusion == success]]; then
