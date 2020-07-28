@@ -61,9 +61,13 @@ jobs:
               conclusion=$(echo $response | jq -r '.jobs[] | select(.name=="job1") | .conclusion')
               echo $conclusion
             else
-              sleep 5s
+              sleep 10s
             fi
           done
           
-          echo "::set-output name=job1_status::$status"
-          echo "::set-output name=job1_conclusion::$conclusion"
+          echo "::set-output name=status::$status"
+          echo "::set-output name=conclusion::$conclusion"
+
+      - name: step wait for job1
+        if: ${{ steps.job1_result.outputs.status == 'completed' && steps.job1_result.outputs.conclusion == 'success' }}
+        run: echo "run this step after job1 completed successfully"
