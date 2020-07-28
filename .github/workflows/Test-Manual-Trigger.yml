@@ -24,7 +24,7 @@ jobs:
       - name: sleep
         run: |
           echo "START: $(date +"%H:%M:%S")"
-          sleep 1m 10s
+          sleep 2m 20s
           echo "END: $(date +"%H:%M:%S")"
 
   job2:
