@@ -1,7 +1,6 @@
 name: Test Manual Trigger
 
 on:
-  workflow_dispatch:
   push:
     paths: 
       -  '**'
@@ -20,54 +19,3 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-
-      - name: sleep
-        run: |
-          echo "START: $(date +"%H:%M:%S")"
-          sleep 1m 20s
-          echo "END: $(date +"%H:%M:%S")"
-
-  job2:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: view the github context
-        run: echo "$GITHUB_CONTEXT"
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-
-      - name: wait job1 completed
-        id: job1_result
-        shell: bash
-        run: |
-          status=""
-          conclusion=""
-          while [ "$status" != "completed" ]
-          do
-            response=$(curl --request GET \
-            --url 'https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/jobs' \
-            --header 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
-            --header 'Accept: application/vnd.github.v3+json')
-            
-            echo "--------------------------------------------------------------------------------------------------"
-            echo "$response"
-            echo "--------------------------------------------------------------------------------------------------"
-            
-            status=$(echo $response | jq -r '.jobs[] | select(.name=="job1") | .status')
-            echo $status
-            if [[ $status == completed ]]; then
-              conclusion=$(echo $response | jq -r '.jobs[] | select(.name=="job1") | .conclusion')
-              echo $conclusion
-            else
-              sleep 10s
-            fi
-          done
-          
-          echo "::set-output name=status::$status"
-          echo "::set-output name=conclusion::$conclusion"
-
-      - name: step wait for job1
-        if: ${{ steps.job1_result.outputs.status == 'completed' && steps.job1_result.outputs.conclusion == 'success' }}
-        run: echo "run this step after job1 completed successfully"
