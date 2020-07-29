@@ -1,6 +1,7 @@
 name: Test Manual Trigger
 
 on:
+  workflow_dispatch:
   push:
     paths: 
       -  '**'
