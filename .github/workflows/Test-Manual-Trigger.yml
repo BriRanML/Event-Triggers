@@ -2,12 +2,10 @@ name: Test Manual Trigger
 
 on:
   workflow_dispatch:
-  push:
-    paths: 
-      -  '**'
-      - '!Readme.md'
-      - '!.github/**'
-      - '.github/workflows/Test-Manual-Trigger.yml'
+    inputs:
+      msg:
+        description: 'Message to show in log'
+        default: 'This workflow run is triggered by manual.'
 
 jobs:
   job1:
@@ -20,3 +18,9 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+
+      - name: run action
+        uses: ActionsRML/Test-JavaScript-action@master
+
+      - name: view envs
+        run: printenv
