@@ -24,3 +24,6 @@ jobs:
 
       - name: view envs
         run: printenv
+
+      - name: print input msg
+        run: echo "msg: ${{ github.event.inputs.msg }}"
