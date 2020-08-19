@@ -1,1 +1,1 @@
-# test-manual-trigger
+# Test triggers
