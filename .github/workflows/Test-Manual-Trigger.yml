@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       msg:
-        description: 'Message to show in log'
-        default: 'This workflow run is triggered by manual.'
+        description: 'Message to show'
+        default: yes
 
 env:
   INPUT_MSG: ${{ github.event.inputs.msg }}
@@ -22,13 +22,10 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
-      - name: run action
-        uses: ActionsRML/Test-JavaScript-action@master
-
-      - name: view envs
-        run: printenv
-
       - name: print input msg
+        if: |
+          github.event.inputs.msg == 'yes' ||
+          github.event.inputs.msg == 'true'
         run: |
           echo "msg = ${{ github.event.inputs.msg }}"
           echo "INPUT_MSG = $INPUT_MSG"
