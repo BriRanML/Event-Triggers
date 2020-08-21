@@ -5,7 +5,7 @@ on:
     inputs:
       msg:
         description: 'Message to show'
-        default: yes
+        default: 'yes'
 
 env:
   INPUT_MSG: ${{ github.event.inputs.msg }}
