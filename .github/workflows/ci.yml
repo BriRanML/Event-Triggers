@@ -1,11 +1,6 @@
 name: CI
 
-on:
-  push:
-  workflow_run:
-    workflows: ["Test Manual Trigger"]
-    types:
-      - completed
+on: push
 
 jobs:
   job1:
