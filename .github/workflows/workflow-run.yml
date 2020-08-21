@@ -1,0 +1,16 @@
+name: Workflow Run
+
+on:
+  workflow_run:
+    workflows: ["Test Manual Trigger"]
+    types:
+      - completed
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: view the github context
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
