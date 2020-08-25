@@ -2,7 +2,7 @@ name: Workflow Run
 
 on:
   workflow_run:
-    workflows: ["Test Manual Trigger", "CI"]
+    workflows: ["CI"]
     types:
       - completed
 
