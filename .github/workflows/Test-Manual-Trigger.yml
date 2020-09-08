@@ -1,4 +1,4 @@
-name: Test Manual Trigger
+name: Manual events
 
 on:
   workflow_dispatch:
