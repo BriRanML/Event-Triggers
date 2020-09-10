@@ -22,8 +22,6 @@ jobs:
           -d '{
            "name": "code-coverage",
            "head_sha": "${{ github.sha }}",
-           "status": "completed",
-           "conclusion": "failure",
            "output": {
              "title": "code-coverage report"
              "summary": "See here."
