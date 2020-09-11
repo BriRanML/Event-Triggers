@@ -24,6 +24,7 @@ jobs:
            "head_sha": "${{ github.sha }}",
            "output": {
              "title": "code-coverage report"
-             "summary": "See here."
+             "summary": "The summary."
+             "text": "The summary."
            }
           }'
