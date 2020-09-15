@@ -1,30 +1,36 @@
 name: Pull Request
 
-on: [pull_request, pull_request_review, pull_request_review_comment, pull_request_target]
+on: [pull_request]
 
 jobs:
   job1:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Win10VS2019-01]
     steps:
       - name: view the github context
+        shell: bash
         run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
 
-      - name: Create a check run
-        if: github.event_name == 'pull_request'
-        run: |
-          curl \
-          -X POST \
-          -H "Authorization: token ${{ secrets.MY_GITHUB_PAT }}" \
-          -H "Accept: application/vnd.github.antiope-preview+json" \
-          https://api.github.com/repos/${{ github.repository }}/check-runs \
-          -d '{
-           "name": "code-coverage",
-           "head_sha": "${{ github.sha }}",
-           "output": {
-             "title": "code-coverage report"
-             "summary": "The summary."
-             "text": "The summary."
-           }
-          }'
+      - name: Checkout
+        uses: actions/checkout@v2.3.2
+
+      - name: Print env
+        shell: bash
+        run: printenv
+
+  job2:
+    runs-on: [self-hosted, Win10VS2019-02]
+    steps:
+      - name: view the github context
+        shell: bash
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+
+      - name: Checkout
+        uses: actions/checkout@v2.3.2
+
+      - name: Print env
+        shell: bash
+        run: printenv
