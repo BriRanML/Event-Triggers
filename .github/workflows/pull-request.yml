@@ -15,9 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.2
 
-      - name: Print env
+      - name: Print GITHUB_WORKSPACE
         shell: bash
-        run: printenv
+        run: echo $GITHUB_WORKSPACE
 
   job2:
     runs-on: [self-hosted, Win10VS2019-02]
@@ -31,6 +31,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.2
 
-      - name: Print env
+      - name: Print GITHUB_WORKSPACE
         shell: bash
-        run: printenv
+        run: echo $GITHUB_WORKSPACE
