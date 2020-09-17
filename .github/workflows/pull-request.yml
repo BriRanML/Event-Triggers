@@ -30,4 +30,4 @@ jobs:
       - name: auto-merge PR
         uses: pascalgn/automerge-action@v0.9.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_PAT }}
