@@ -25,7 +25,7 @@ jobs:
 
       - name: set message
         run: |
-          merge_commit_title="Merge pull request \#${{ github.event.pull_request.number }} from ${{ github.event.pull_request.head.label }}"
+          merge_commit_title="Merge pull request #${{ github.event.pull_request.number }} from ${{ github.event.pull_request.head.label }}"
           merge_commit_message= ${{ github.event.pull_request.title }}
           
           echo "merge_commit_title = $merge_commit_title"
